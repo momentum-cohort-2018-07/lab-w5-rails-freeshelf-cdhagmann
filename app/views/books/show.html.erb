@@ -3,16 +3,16 @@
 <% end %>
 
 <div class="col-md-12">
-  <div class="card mb-12 shadow-sm bg-info">
-    <h1 class="text-center"><%= @book.title %></h1>
-    <h6 class="text-center">By <%= @book.author %></h6>
+  <div class="card mb-12 shadow-sm bg-danger">
+    <h1 class="text-center text-white"><%= @book.title %></h1>
+    <h6 class="text-center text-white">By <%= @book.author %></h6>
     <% begin %>
       <%= image_tag @book.image.url %>
     <% rescue %>
     <% end %>
     <div class="card-body">
-      <p class="card-text"><%= @book.description %></p>
-      <div class="d-flex justify-content-center align-@books-center btn-group">
+      <p class="card-text text-white"><%= @book.description %></p>
+      <div class="d-flex justify-content-center align-item-center btn-group">
         <div class="btn-group">
           <a href=<%= @book.url %> class="btn btn-success text-white"> Read</a>
             
