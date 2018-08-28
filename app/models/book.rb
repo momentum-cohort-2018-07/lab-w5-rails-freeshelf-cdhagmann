@@ -1,7 +1,7 @@
 require 'csv'
 
 class Book < ApplicationRecord
-
+  validates :title, :url, presence: true
   mount_uploader :image, ImageUploader
 
   def self.to_csv(options = {})

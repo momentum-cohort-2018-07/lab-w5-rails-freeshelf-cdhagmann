@@ -1,32 +1,25 @@
-<p id="notice"><%= notice %></p>
+<%if notice %>
+<p id="notice" class="alert alert-success" role="alert"><%= notice %></p>
+<% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
-
-<p>
-  <strong>Author:</strong>
-  <%= @book.author %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @book.description %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @book.url %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <% begin %>
-  <%= image_tag @book.image.thumb.url %>
-  <% rescue %>
-  <% end %>
-</p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<div class="col-md-12">
+  <div class="card mb-12 shadow-sm bg-info">
+    <h1 class="text-center"><%= @book.title %></h1>
+    <h6 class="text-center">By <%= @book.author %></h6>
+    <% begin %>
+      <%= image_tag @book.image.url %>
+    <% rescue %>
+    <% end %>
+    <div class="card-body">
+      <p class="card-text"><%= @book.description %></p>
+      <div class="d-flex justify-content-center align-@books-center btn-group">
+        <div class="btn-group">
+          <a href=<%= @book.url %> class="btn btn-success text-white"> Read</a>
+            
+          <%= link_to 'Edit', edit_book_path(@book) , {:class=>"btn btn-secondary text-white" }%>
+          <%= link_to 'Back', books_path, {:class=>"btn btn-secondary text-white"  } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
