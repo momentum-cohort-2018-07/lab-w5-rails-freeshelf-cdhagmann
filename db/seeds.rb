@@ -8,6 +8,10 @@
 
 require 'csv'
 
+user = User.new
+user.name = 'Chris'
+user.save
+
 CSV.foreach('db/books.csv', headers: true) do |row|
   Book.create(row.to_h)
 end
