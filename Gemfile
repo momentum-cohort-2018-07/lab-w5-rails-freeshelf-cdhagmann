@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveStorage variant
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'csv'
 # gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
