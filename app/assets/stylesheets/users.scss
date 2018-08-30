@@ -1,0 +1,36 @@
+// @import "bootstrap";
+
+/* forms */
+input,
+textarea,
+select,
+.uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  border: none;
+  background-color: #ffffff;
+
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+// .field_with_errors {
+//   background-color: #ffffff;
+//   @extend .has-error;
+
+//   .form-control {
+//     border-color: $state-danger-text;
+//     @extend .col-md-6;
+//   }
+// }

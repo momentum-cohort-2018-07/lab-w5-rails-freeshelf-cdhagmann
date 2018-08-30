@@ -1,0 +1,26 @@
+<%if notice %>
+<p id="notice" class="alert alert-success" role="alert"><%= notice %></p>
+<% end %>
+
+<div class="col-md-12">
+  <div class="card mb-12 shadow-sm bg-danger">
+    <h1 class="text-center text-white"><%= @book.title %></h1>
+    <h6 class="text-center text-white">By <%= @book.author %></h6>
+    <% begin %>
+      <%= image_tag @book.image.url %>
+    <% rescue %>
+    <% end %>
+    <div class="card-body">
+      <p class="card-text text-white"><%= @book.description %></p>
+      <div class="d-flex justify-content-center align-item-center btn-group">
+        <div class="btn-group">
+          <a href=<%= @book.url %> class="btn btn-success text-white"> Read</a>
+            <% if current_user && (current_user.id  == @book.user_id || current_user.id == 1)  %>
+          <%= link_to 'Edit', edit_book_path(@book) , {:class=>"btn btn-secondary text-white" }%>
+            <% end %>
+          <%= link_to 'Back', books_path, {:class=>"btn btn-secondary text-white"  } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
