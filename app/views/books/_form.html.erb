@@ -43,10 +43,7 @@
     <% end %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :user_id %>
-    <%= form.collection_select :user_id, User.order(:id) ,:id, :name %>
-  </div>
+  <%= form.hidden_field :user_id, :value => session[:user_id] %>
 
   <div class="actions">
     <%= form.submit :class =>  "btn btn-primary" %>

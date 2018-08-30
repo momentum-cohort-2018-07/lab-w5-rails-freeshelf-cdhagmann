@@ -1,22 +1,35 @@
+
+<section class="d-flex flex-column justify-content-between  bg-danger" style="margin-bottom: 20px"> 
+  <div class="text-right bg-danger btn-group" style='padding: 10px'>
+  <% if current_user %>
+    <%= link_to 'Log out', session_path, method: :delete, :class=>"text-right text-white btn btn-secondary text-white"  %>
+    <div class="btn btn-primary">Welcome, <%= current_user.username %></div>
+  <% else %>
+    <%= link_to 'Sign Up', new_user_path, { :class=>"text-right text-white btn btn-secondary text-white"} %>
+    <%= link_to 'Log In', new_session_path, { :class=>"text-right text-white btn btn-secondary text-white"} %>
+  <% end %>
+  </div>
+  <div class="jumbotron container text-center bg-danger">
+    <h1 class="jumbotron-heading text-white">FreeShelf</h1>
+    <p class="lead text-white">Free Online Programming Books</p>
+    <% if current_user %>
+    <p class="lead text-white"><%= current_user.username %></p>
+    <% end %>
+  </div>
+</section>
+
 <%if notice %>
-<p id="notice" class="alert alert-success" role="alert"><%= notice %></p>
+  <p id="notice" class="alert alert-success" role="alert"><%= notice %></p>
 <% end %>
+
 <main role="main">
-
-  <section class="jumbotron text-center bg-danger">
-    <div class="container">
-      <h1 class="jumbotron-heading text-white">FreeShelf</h1>
-      <p class="lead text-white">Free Online Programming Books</p>
-    </div>
-  </section>
-
   <div class="container">
       <div class="row">
         <% @books.each do |book| %>
           <div class="col-md-4 album">
             <div class="card mb-4 shadow-lg">
               <% begin %>
-                <%= image_tag book.image.thumb.url, :class => 'border-info' %>
+                <%= image_tag book.image.thumb.url, :class => 'border-info ' %>
               <% rescue %>
               <% end %>
               <div class="card-body">
@@ -26,10 +39,22 @@
               <div class="card-footer"> 
                 <div class="d-flex justify-content-center align-items-center btn-group">
                   <%= link_to 'View', book, { :class=>"btn btn-secondary text-white" } %>
-                  <%= link_to 'Edit', edit_book_path(book) , {:class=>"btn btn-secondary text-white"  }%>
-                  <%= link_to 'Delete', book, method: :delete, :class=>"btn btn-danger text-white" ,data: { confirm: 'Are you sure?' } %>
+                  <% if current_user && ( current_user.id  == book.user_id  || current_user.id == 1 ) %>
+                    <%= link_to 'Edit', edit_book_path(book) , {:class=>"btn btn-secondary text-white"  }%>
+                    <%= link_to 'Delete', book, method: :delete, :class=>"btn btn-danger text-white" ,data: { confirm: 'Are you sure?' } %>
+                  <% end %>
                 </div>
-                <small class="text-muted text-center">Last updated <%=book.updated_at %></small>
+
+                <% if (Time.now - book.updated_at).to_i < 60 %>
+                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i %> sec. ago by <%=User.find(book.user_id).username %></small>
+                <% elsif (Time.now - book.updated_at).to_i < 3600 %>
+                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i / 60 %> min. ago by <%=User.find(book.user_id).username %></small>
+                <% elsif (Time.now - book.updated_at).to_i < (3600 * 24) %>
+                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i / 3600 %> hr. ago by <%=User.find(book.user_id).username %></small>              
+                <% else %>
+                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i / (3600 * 24) %> day(s) ago by <%=User.find(book.user_id).username %></small>
+                <% end%>
+                  <br>
               </div> 
             </div>
           </div>

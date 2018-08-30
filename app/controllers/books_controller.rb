@@ -24,6 +24,7 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    redirect_to @book, notice: 'This is not your book' if !(current_user.id == @book.user_id || current_user.id == 1)
   end
 
   # POST /books
@@ -31,14 +32,10 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
 
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render :show, status: :created, location: @book }
-      else
-        format.html { render :new }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
+    if @book.save
+      redirect_to @book, notice: 'Book was successfully created.'
+    else
+      render :new
     end
   end
 
