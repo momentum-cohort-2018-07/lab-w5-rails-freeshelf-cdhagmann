@@ -15,6 +15,13 @@ user.email = 'admin@freeshelf.com'
 user.password = 'admin'
 user.save
 
+
+user = User.new
+user.username = 'user'
+user.email = 'user@other.com'
+user.password = 'user'
+user.save
+
 # 4.times do
 #   user = User.new
 #   user.username = 'admin'

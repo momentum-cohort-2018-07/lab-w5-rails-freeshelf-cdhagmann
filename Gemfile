@@ -35,6 +35,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'csv'
+gem 'faker'
 # gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment

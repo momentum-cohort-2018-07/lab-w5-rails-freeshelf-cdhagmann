@@ -19,6 +19,7 @@ class BooksController < ApplicationController
 
   # GET /books/new
   def new
+    redirect_to books_url, notice: 'You must be logged in to add a book' if !current_user
     @book = Book.new
   end
 

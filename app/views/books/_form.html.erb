@@ -43,7 +43,7 @@
     <% end %>
   </div>
 
-  <%= form.hidden_field :user_id, :value => session[:user_id] %>
+  <%= form.hidden_field :user_id, :value => book.user_id || current_user.id  %>
 
   <div class="actions">
     <%= form.submit :class =>  "btn btn-primary" %>

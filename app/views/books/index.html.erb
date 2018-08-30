@@ -12,9 +12,6 @@
   <div class="jumbotron container text-center bg-danger">
     <h1 class="jumbotron-heading text-white">FreeShelf</h1>
     <p class="lead text-white">Free Online Programming Books</p>
-    <% if current_user %>
-    <p class="lead text-white"><%= current_user.username %></p>
-    <% end %>
   </div>
 </section>
 
@@ -46,15 +43,16 @@
                 </div>
 
                 <% if (Time.now - book.updated_at).to_i < 60 %>
-                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i %> sec. ago by <%=User.find(book.user_id).username %></small>
+                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i %> sec. ago</small>
                 <% elsif (Time.now - book.updated_at).to_i < 3600 %>
-                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i / 60 %> min. ago by <%=User.find(book.user_id).username %></small>
+                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i / 60 %> min. ago</small>
                 <% elsif (Time.now - book.updated_at).to_i < (3600 * 24) %>
-                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i / 3600 %> hr. ago by <%=User.find(book.user_id).username %></small>              
+                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i / 3600 %> hr. ago</small>              
                 <% else %>
-                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i / (3600 * 24) %> day(s) ago by <%=User.find(book.user_id).username %></small>
+                  <small class="text-muted text-center">Last updated <%= (Time.now - book.updated_at).to_i / (3600 * 24) %> day(s) ago</small>
                 <% end%>
-                  <br>
+                <br>
+                <small class="text-muted text-center">Submitted by <%=User.find(book.user_id).username %></small>
               </div> 
             </div>
           </div>
